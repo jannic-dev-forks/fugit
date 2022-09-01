@@ -64,6 +64,7 @@ mod test {
         Hertz, HertzU32, HertzU64, Kilohertz, KilohertzU32, KilohertzU64, Megahertz, MegahertzU32,
         MegahertzU64, TimerRate, TimerRateU32, TimerRateU64,
     };
+    use core::cmp::Ordering;
 
     ////////////////////////////////////////////////////////////////////////////////
     //
@@ -767,11 +768,13 @@ mod test {
         // Wrapping
         assert!(
             Instant::<u32, 1, 1_000>::from_ticks(1)
-                > Instant::<u32, 1, 1_000>::from_ticks(u32::MAX)
+                .const_cmp(Instant::<u32, 1, 1_000>::from_ticks(u32::MAX))
+                == Ordering::Greater
         );
         assert!(
             Instant::<u32, 1, 1_000>::from_ticks(u32::MAX - 1)
-                < Instant::<u32, 1, 1_000>::from_ticks(u32::MAX)
+                .const_cmp(Instant::<u32, 1, 1_000>::from_ticks(u32::MAX))
+                == Ordering::Less
         );
 
         // Non-wrapping
@@ -783,6 +786,10 @@ mod test {
         assert!(Instant::<u32, 1, 1_000>::from_ticks(1) <= Instant::<u32, 1, 1_000>::from_ticks(2));
         assert!(Instant::<u32, 1, 1_000>::from_ticks(1) == Instant::<u32, 1, 1_000>::from_ticks(1));
         assert!(Instant::<u32, 1, 1_000>::from_ticks(1) != Instant::<u32, 1, 1_000>::from_ticks(2));
+        assert!(
+            Instant::<u32, 1, 1_000>::from_ticks(1)
+                < Instant::<u32, 1, 1_000>::from_ticks(u32::MAX)
+        );
 
         // Checked duration since non-wrapping
         assert_eq!(
@@ -819,11 +826,13 @@ mod test {
         // Wrapping
         assert!(
             Instant::<u64, 1, 1_000>::from_ticks(1)
-                > Instant::<u64, 1, 1_000>::from_ticks(u64::MAX)
+                .const_cmp(Instant::<u64, 1, 1_000>::from_ticks(u64::MAX))
+                == Ordering::Greater
         );
         assert!(
             Instant::<u64, 1, 1_000>::from_ticks(u64::MAX - 1)
-                < Instant::<u64, 1, 1_000>::from_ticks(u64::MAX)
+                .const_cmp(Instant::<u64, 1, 1_000>::from_ticks(u64::MAX))
+                == Ordering::Less
         );
 
         // Non-wrapping
@@ -835,6 +844,10 @@ mod test {
         assert!(Instant::<u64, 1, 1_000>::from_ticks(1) <= Instant::<u64, 1, 1_000>::from_ticks(2));
         assert!(Instant::<u64, 1, 1_000>::from_ticks(1) == Instant::<u64, 1, 1_000>::from_ticks(1));
         assert!(Instant::<u64, 1, 1_000>::from_ticks(1) != Instant::<u64, 1, 1_000>::from_ticks(2));
+        assert!(
+            Instant::<u64, 1, 1_000>::from_ticks(1)
+                < Instant::<u64, 1, 1_000>::from_ticks(u64::MAX)
+        );
 
         // Checked duration since non-wrapping
         assert_eq!(
