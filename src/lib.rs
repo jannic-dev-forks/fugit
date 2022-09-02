@@ -764,25 +764,28 @@ mod test {
 
     #[test]
     fn instant_compare_u32() {
-        // Wrapping
-        assert!(
-            Instant::<u32, 1, 1_000>::from_ticks(1)
-                > Instant::<u32, 1, 1_000>::from_ticks(u32::MAX)
-        );
-        assert!(
-            Instant::<u32, 1, 1_000>::from_ticks(u32::MAX - 1)
-                < Instant::<u32, 1, 1_000>::from_ticks(u32::MAX)
-        );
+        #[cfg(feature = "lenient_cmp")]
+        {
+            // Wrapping
+            assert!(
+                Instant::<u32, 1, 1_000>::from_ticks(1)
+                    > Instant::<u32, 1, 1_000>::from_ticks(u32::MAX)
+            );
+            assert!(
+                Instant::<u32, 1, 1_000>::from_ticks(u32::MAX - 1)
+                    < Instant::<u32, 1, 1_000>::from_ticks(u32::MAX)
+            );
 
-        // Non-wrapping
-        assert!(Instant::<u32, 1, 1_000>::from_ticks(2) > Instant::<u32, 1, 1_000>::from_ticks(1));
-        assert!(Instant::<u32, 1, 1_000>::from_ticks(2) >= Instant::<u32, 1, 1_000>::from_ticks(1));
-        assert!(Instant::<u32, 1, 1_000>::from_ticks(1) >= Instant::<u32, 1, 1_000>::from_ticks(1));
-        assert!(Instant::<u32, 1, 1_000>::from_ticks(1) < Instant::<u32, 1, 1_000>::from_ticks(2));
-        assert!(Instant::<u32, 1, 1_000>::from_ticks(1) <= Instant::<u32, 1, 1_000>::from_ticks(1));
-        assert!(Instant::<u32, 1, 1_000>::from_ticks(1) <= Instant::<u32, 1, 1_000>::from_ticks(2));
-        assert!(Instant::<u32, 1, 1_000>::from_ticks(1) == Instant::<u32, 1, 1_000>::from_ticks(1));
-        assert!(Instant::<u32, 1, 1_000>::from_ticks(1) != Instant::<u32, 1, 1_000>::from_ticks(2));
+            // Non-wrapping
+            assert!(Instant::<u32, 1, 1_000>::from_ticks(2) > Instant::<u32, 1, 1_000>::from_ticks(1));
+            assert!(Instant::<u32, 1, 1_000>::from_ticks(2) >= Instant::<u32, 1, 1_000>::from_ticks(1));
+            assert!(Instant::<u32, 1, 1_000>::from_ticks(1) >= Instant::<u32, 1, 1_000>::from_ticks(1));
+            assert!(Instant::<u32, 1, 1_000>::from_ticks(1) < Instant::<u32, 1, 1_000>::from_ticks(2));
+            assert!(Instant::<u32, 1, 1_000>::from_ticks(1) <= Instant::<u32, 1, 1_000>::from_ticks(1));
+            assert!(Instant::<u32, 1, 1_000>::from_ticks(1) <= Instant::<u32, 1, 1_000>::from_ticks(2));
+            assert!(Instant::<u32, 1, 1_000>::from_ticks(1) == Instant::<u32, 1, 1_000>::from_ticks(1));
+            assert!(Instant::<u32, 1, 1_000>::from_ticks(1) != Instant::<u32, 1, 1_000>::from_ticks(2));
+        }
 
         // Checked duration since non-wrapping
         assert_eq!(
@@ -816,25 +819,28 @@ mod test {
 
     #[test]
     fn instant_compare_u64() {
-        // Wrapping
-        assert!(
-            Instant::<u64, 1, 1_000>::from_ticks(1)
-                > Instant::<u64, 1, 1_000>::from_ticks(u64::MAX)
-        );
-        assert!(
-            Instant::<u64, 1, 1_000>::from_ticks(u64::MAX - 1)
-                < Instant::<u64, 1, 1_000>::from_ticks(u64::MAX)
-        );
+        #[cfg(feature = "lenient_cmp")]
+        {
+            // Wrapping
+            assert!(
+                Instant::<u64, 1, 1_000>::from_ticks(1)
+                    > Instant::<u64, 1, 1_000>::from_ticks(u64::MAX)
+            );
+            assert!(
+                Instant::<u64, 1, 1_000>::from_ticks(u64::MAX - 1)
+                    < Instant::<u64, 1, 1_000>::from_ticks(u64::MAX)
+            );
 
-        // Non-wrapping
-        assert!(Instant::<u64, 1, 1_000>::from_ticks(2) > Instant::<u64, 1, 1_000>::from_ticks(1));
-        assert!(Instant::<u64, 1, 1_000>::from_ticks(2) >= Instant::<u64, 1, 1_000>::from_ticks(1));
-        assert!(Instant::<u64, 1, 1_000>::from_ticks(1) >= Instant::<u64, 1, 1_000>::from_ticks(1));
-        assert!(Instant::<u64, 1, 1_000>::from_ticks(1) < Instant::<u64, 1, 1_000>::from_ticks(2));
-        assert!(Instant::<u64, 1, 1_000>::from_ticks(1) <= Instant::<u64, 1, 1_000>::from_ticks(1));
-        assert!(Instant::<u64, 1, 1_000>::from_ticks(1) <= Instant::<u64, 1, 1_000>::from_ticks(2));
-        assert!(Instant::<u64, 1, 1_000>::from_ticks(1) == Instant::<u64, 1, 1_000>::from_ticks(1));
-        assert!(Instant::<u64, 1, 1_000>::from_ticks(1) != Instant::<u64, 1, 1_000>::from_ticks(2));
+            // Non-wrapping
+            assert!(Instant::<u64, 1, 1_000>::from_ticks(2) > Instant::<u64, 1, 1_000>::from_ticks(1));
+            assert!(Instant::<u64, 1, 1_000>::from_ticks(2) >= Instant::<u64, 1, 1_000>::from_ticks(1));
+            assert!(Instant::<u64, 1, 1_000>::from_ticks(1) >= Instant::<u64, 1, 1_000>::from_ticks(1));
+            assert!(Instant::<u64, 1, 1_000>::from_ticks(1) < Instant::<u64, 1, 1_000>::from_ticks(2));
+            assert!(Instant::<u64, 1, 1_000>::from_ticks(1) <= Instant::<u64, 1, 1_000>::from_ticks(1));
+            assert!(Instant::<u64, 1, 1_000>::from_ticks(1) <= Instant::<u64, 1, 1_000>::from_ticks(2));
+            assert!(Instant::<u64, 1, 1_000>::from_ticks(1) == Instant::<u64, 1, 1_000>::from_ticks(1));
+            assert!(Instant::<u64, 1, 1_000>::from_ticks(1) != Instant::<u64, 1, 1_000>::from_ticks(2));
+        }
 
         // Checked duration since non-wrapping
         assert_eq!(

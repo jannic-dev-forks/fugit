@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Updated documentation of const_cmp
 
+- Hide `impl Ord for Instant` and `impl PartialOrd for Instant` behind a new
+  feature flag `lenient_cmp`. (**Breaking change**)
+
 ## [v0.3.6] 
 
 ### Fixed

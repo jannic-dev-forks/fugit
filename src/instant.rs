@@ -187,6 +187,7 @@ macro_rules! impl_instant_for_integer {
             }
         }
 
+        #[cfg(feature="lenient_cmp")]
         impl<const NOM: u32, const DENOM: u32> PartialOrd for Instant<$i, NOM, DENOM> {
             /// This implementation deviates from the definition of
             /// [PartialOrd::partial_cmp](core::cmp::PartialOrd::partial_cmp):
@@ -202,6 +203,7 @@ macro_rules! impl_instant_for_integer {
             }
         }
 
+        #[cfg(feature="lenient_cmp")]
         impl<const NOM: u32, const DENOM: u32> Ord for Instant<$i, NOM, DENOM> {
             /// This implementation deviates from the definition of
             /// [Ord::cmp](core::cmp::Ord::cmp):
